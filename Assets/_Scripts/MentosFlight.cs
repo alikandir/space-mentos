@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MentosFlight : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public float bubbleCollected = 0;
+    public float bubbleMultiplier = 1;
+    private Rigidbody rb;
+    float input;
+    public float moveSpeed = 5f;
+    public float maxFallSpeed = 10f;
+    private void Start() {
+        rb = GetComponent<Rigidbody>();
+    }
+    
+    public void OnMove(InputAction.CallbackContext context) {
+        input = context.ReadValue<float>();
+        
         
     }
+    private void Update() {
+        if (Input.GetMouseButtonDown(0)) {
+            onBoostStart();
+        }
+    }
+    private void FixedUpdate() {
+        rb.velocity = new Vector2(input*moveSpeed*Time.fixedDeltaTime, Mathf.Max(rb.velocity.y, -maxFallSpeed));
+        Debug.Log(rb.velocity);
+    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
+
+    private Vector2 GetBoostAmount() {
+        return new Vector2(0, 1*bubbleCollected*bubbleMultiplier);
+    }
+    
+    public void onBoostStart() {
+        rb.velocity = GetBoostAmount();
+        bubbleMultiplier = 1;
+        bubbleCollected = 0;
     }
 }
