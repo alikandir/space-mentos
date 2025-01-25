@@ -11,6 +11,7 @@ public class MentosFlight : MonoBehaviour
     public float maxFallSpeed = 10f;
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     
     public void OnMove(InputAction.CallbackContext context) {

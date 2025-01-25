@@ -6,9 +6,11 @@ using UnityEngine;
 public class BubbleCollect : MonoBehaviour
 {
     public float bubbleAmount=1f;
-    public GameManager manager;
+    private GameManager manager;
     public Camera mainCamera;
-
+    private void Start() {
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     private void Update()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
