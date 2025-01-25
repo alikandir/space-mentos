@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +12,8 @@ public class MentosFlight : MonoBehaviour
     public float maxFallSpeed = 10f;
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager = GameManager.instance;
+        onBoostStart();
     }
     
     public void OnMove(InputAction.CallbackContext context) {
@@ -19,11 +21,7 @@ public class MentosFlight : MonoBehaviour
         
         
     }
-    private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            onBoostStart();
-        }
-    }
+    
     private void FixedUpdate() {
         rb.velocity = new Vector2(input*moveSpeed*Time.fixedDeltaTime, Mathf.Max(rb.velocity.y, -maxFallSpeed));
         Debug.Log(rb.velocity);
@@ -40,4 +38,6 @@ public class MentosFlight : MonoBehaviour
         bubbleMultiplier = 1;
         manager.ResetBubbleCount();
     }
+    
+    
 }
