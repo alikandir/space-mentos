@@ -70,5 +70,12 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
         isTimerSet = true;
     }
-    
+
+    public void ReBottle()
+    {
+        isFlying = false;
+        isCollecting = true;
+        isTimerSet = false;
+        SceneManager.LoadScene("Collect");
+    }
 }
