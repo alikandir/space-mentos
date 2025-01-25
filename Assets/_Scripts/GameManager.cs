@@ -78,4 +78,9 @@ public class GameManager : MonoBehaviour
         isTimerSet = false;
         SceneManager.LoadScene("Collect");
     }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+    }
 }

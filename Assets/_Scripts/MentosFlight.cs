@@ -13,7 +13,7 @@ public class MentosFlight : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody>();
         manager = GameManager.instance;
-        onBoostStart();
+        Invoke("onBoostStart",2);
     }
     
     public void OnMove(InputAction.CallbackContext context) {
