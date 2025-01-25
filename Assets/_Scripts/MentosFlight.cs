@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MentosFlight : MonoBehaviour
 {
-    public GameManager manager;
+    private GameManager manager;
     public float bubbleMultiplier = 1;
     private Rigidbody rb;
     float input;
