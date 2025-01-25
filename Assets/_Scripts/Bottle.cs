@@ -9,7 +9,13 @@ public class Bottle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gameManager.ReBottle();
+        if (other.CompareTag("Player") && gameManager.isFlying == true)
+        {
+            gameManager.ReBottle();
+            Destroy(gameObject);
+        }
+        
+        
     }
 }
 

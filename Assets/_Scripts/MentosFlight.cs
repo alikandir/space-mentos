@@ -24,7 +24,6 @@ public class MentosFlight : MonoBehaviour
     
     private void FixedUpdate() {
         rb.velocity = new Vector2(input*moveSpeed*Time.fixedDeltaTime, Mathf.Max(rb.velocity.y, -maxFallSpeed));
-        Debug.Log(rb.velocity);
     }
 
     
@@ -37,7 +36,9 @@ public class MentosFlight : MonoBehaviour
         rb.velocity = GetBoostAmount();
         bubbleMultiplier = 1;
         manager.ResetBubbleCount();
+        Invoke("SetFlightOn", 2);
     }
+    public void SetFlightOn() {manager.isFlying = true;}
     
     
 }

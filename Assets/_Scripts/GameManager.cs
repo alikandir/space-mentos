@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool isCollecting = false;
-    bool isFlying = false;
+    public bool isFlying = false;
     [SerializeField] float collectingTime = 10f;
     float startTime;
     bool isTimerSet = false;
@@ -59,10 +59,10 @@ public class GameManager : MonoBehaviour
     void SendToFlight()
     {
         isCollecting = false;
-        isFlying = true;
         isTimerSet = false;
         Debug.Log("Sending To Flight");
         SceneManager.LoadScene("Fly");
+        
     }
 
     void StartTimer()
@@ -83,4 +83,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
     }
+    
+    
 }
