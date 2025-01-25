@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     float startTime;
     bool isTimerSet = false;
     public static GameManager instance;
+    public bool isInBottle;
     
     private void Awake() {
         
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
         isFlying = false;
         isCollecting = true;
         isTimerSet = false;
+        
         
     }
 
