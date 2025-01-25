@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1729133576061529956}
   - component: {fileID: 216055975320534246}
   m_Layer: 0
-  m_Name: BubbleBooster
+  m_Name: MultiplierPowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
