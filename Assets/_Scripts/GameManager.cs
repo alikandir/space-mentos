@@ -73,10 +73,11 @@ public class GameManager : MonoBehaviour
 
     public void ReBottle()
     {
+        SceneManager.LoadScene("Collect");
         isFlying = false;
         isCollecting = true;
         isTimerSet = false;
-        SceneManager.LoadScene("Collect");
+        
     }
 
     public void GameOver()
