@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MentosFlight : MonoBehaviour
 {
-    public float bubbleCollected = 0;
+    public GameManager manager;
     public float bubbleMultiplier = 1;
     private Rigidbody rb;
     float input;
@@ -31,12 +31,12 @@ public class MentosFlight : MonoBehaviour
     
 
     private Vector2 GetBoostAmount() {
-        return new Vector2(0, 1*bubbleCollected*bubbleMultiplier);
+        return new Vector2(0, 1*manager.GetBubbleCollected()*bubbleMultiplier);
     }
     
     public void onBoostStart() {
         rb.velocity = GetBoostAmount();
         bubbleMultiplier = 1;
-        bubbleCollected = 0;
+        manager.ResetBubbleCount();
     }
 }
