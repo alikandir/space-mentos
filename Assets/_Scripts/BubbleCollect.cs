@@ -21,13 +21,10 @@ public class BubbleCollect : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnParticleCollision(GameObject other)
     {
         
-        if (other.CompareTag("Bubble"))
-        {
-            manager.CollectBubble(bubbleAmount);
-            Destroy(other.gameObject);
+        manager.CollectBubble(bubbleAmount);
+        Debug.Log("bubble collected");
         }
-    }
 }
