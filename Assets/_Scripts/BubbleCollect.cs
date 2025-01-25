@@ -1,10 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+
 
 public class BubbleCollect : MonoBehaviour
 {
+    public AudioClip[] popSounds;
     public float bubbleAmount=1f;
     private GameManager manager;
     public Camera mainCamera;
@@ -15,6 +15,7 @@ public class BubbleCollect : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.forward, new Vector3(0, 0, 0));
+        
 
         if (plane.Raycast(ray, out float distance))
         {
@@ -27,6 +28,8 @@ public class BubbleCollect : MonoBehaviour
     {
         
         manager.CollectBubble(bubbleAmount);
-        Debug.Log("bubble collected");
+        var popSound = popSounds[UnityEngine.Random.Range(0, popSounds.Length)];
+        var pitch = Random.Range(0.9f, 1.1f); // Slight random pitch variation
+        AudioManager.Instance.PlaySound(popSound, transform.position, pitch: pitch);
         }
 }
