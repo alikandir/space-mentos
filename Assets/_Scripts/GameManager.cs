@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     float startTime;
     bool isTimerSet = false;
     public static GameManager instance;
+    
     private void Awake() {
         
         if (instance == null) {
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
                 StartTimer();
             }
         }
+        
     }
 
     void SendToFlight()
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
         isFlying = true;
         isTimerSet = false;
         Debug.Log("Sending To Flight");
-        
+        SceneManager.LoadScene("Fly");
     }
 
     void StartTimer()

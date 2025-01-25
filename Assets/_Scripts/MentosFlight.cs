@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +12,7 @@ public class MentosFlight : MonoBehaviour
     public float maxFallSpeed = 10f;
     private void Start() {
         rb = GetComponent<Rigidbody>();
-        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager = GameManager.instance;
     }
     
     public void OnMove(InputAction.CallbackContext context) {
