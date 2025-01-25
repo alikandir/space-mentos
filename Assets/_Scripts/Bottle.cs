@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Bottle : MonoBehaviour
 {
-    GameManager gameManager = GameManager.instance;
+    
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && gameManager.isFlying == true)
+        Debug.Log("Triggered" + other.name);
+        if (other.CompareTag("Player") && GameManager.instance.isFlying)
         {
-            gameManager.ReBottle();
-            Destroy(gameObject);
+            GameManager.instance.ReBottle();
+            
         }
         
         

@@ -10,6 +10,7 @@ public class BubbleCollect : MonoBehaviour
     public Camera mainCamera;
     private void Start() {
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        mainCamera = Camera.main;
     }
     private void Update()
     {
