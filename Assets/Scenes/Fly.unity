@@ -778,8 +778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollecting: 0
+  isFlying: 0
   collectingTime: 10
-  bubbleCollected: 31.2
+  bubbleCollected: 20.3
 --- !u!4 &2086897389
 Transform:
   m_ObjectHideFlags: 0
