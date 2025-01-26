@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public Animator CamAnimator;
     public GameObject mainMenu;
     public GameObject credits;
+    public GameObject howToPlay;
     public void Play()
     {
         CamAnimator.SetTrigger("start");
@@ -24,5 +25,16 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(true);
         credits.SetActive(false);
     }
-    
+
+    public void BackFromHow()
+    {
+        mainMenu.SetActive(true);
+        howToPlay.SetActive(false);
+    }
+
+    public void howToPlayScene()
+    {
+        mainMenu.SetActive(false);
+        howToPlay.SetActive(true);
+    }
 }
