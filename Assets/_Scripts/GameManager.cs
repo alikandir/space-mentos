@@ -74,10 +74,11 @@ public class GameManager : MonoBehaviour
 
     public void ReBottle()
     {
-        SceneManager.LoadScene("Collect");
         isFlying = false;
         isCollecting = true;
         isTimerSet = false;
+
+        SceneManager.LoadScene("Collect");
         
         
     }
@@ -86,6 +87,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
     }
-    
-    
+
+    public float RemaningTime()
+    {
+        float result = collectingTime-(Time.time - startTime);
+        return result > 0 ? result : 0;
+    }
 }
