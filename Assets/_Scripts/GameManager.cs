@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     bool isTimerSet = false;
     public static GameManager instance;
     public bool isInBottle;
-    
+    public float bubbleMultiplierActual = 0.60f;
+    public float bubbleMultiplierForTxt = 1;
+    public event Action<float> OnMultCollected;
+    public float maxHeightReached = 0;
     private void Awake() {
         
         if (instance == null) {
@@ -39,15 +42,27 @@ public class GameManager : MonoBehaviour
     {
         bubbleCollected += amount;
     }
+    public void CollectMultiplier(float amount)
+    {
+        bubbleMultiplierActual += amount;
+        bubbleMultiplierForTxt += 1;
+        OnMultCollected?.Invoke(bubbleMultiplierForTxt);
+    }
+    public void ResetMultiplier()
+    {
+        bubbleMultiplierActual = 0.60f;
+        bubbleMultiplierForTxt = 1;
+        OnMultCollected?.Invoke(bubbleMultiplierForTxt);
+    }
 
     private void Update()
     {
         if (isCollecting)
         {
-            Debug.Log(Time.time +"-"+startTime);
+           
             if (isTimerSet && Time.time - startTime > collectingTime)
             {
-                SendToFlight();
+                Invoke("SendToFlight", 12f);
             }
             if(!isTimerSet)
             {
@@ -63,6 +78,7 @@ public class GameManager : MonoBehaviour
         isTimerSet = false;
         Debug.Log("Sending To Flight");
         SceneManager.LoadScene("Fly");
+        
         
     }
 

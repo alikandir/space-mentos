@@ -1,6 +1,8 @@
-using Unity.VisualScripting;
+
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MentosFlight : MonoBehaviour
 {
@@ -52,6 +54,12 @@ public class MentosFlight : MonoBehaviour
             
         Quaternion targetRotation = Quaternion.Euler(trans.rotation.eulerAngles.x, trans.rotation.eulerAngles.y, targetZRotation);
         trans.rotation = Quaternion.Lerp(trans.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        SaveMaxHeight();
+    }
+    public void SaveMaxHeight() {
+        if (transform.position.y > GameManager.instance.maxHeightReached) {
+            GameManager.instance.maxHeightReached = transform.position.y;
+        }
     }
     private void FixedUpdate() {
         if (manager.isFlying) {
@@ -60,20 +68,36 @@ public class MentosFlight : MonoBehaviour
         }
         
     }
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Finish")) {
+            SceneManager.LoadScene("GameWonScene");
+        }
+        else if (other.CompareTag("Ground")){
+            SceneManager.LoadScene("GameOverScene");
+        }
+    }
 
     
 
     private Vector2 GetBoostAmount() {
-        float collectedBubbles = manager.GetBubbleCollected()*collectedBubbleScaler;
+        float collectedBubbles = manager.GetBubbleCollected();
+        float maxVelocity = 14;
+        var totalBubble = collectedBubbles * GameManager.instance.bubbleMultiplierActual;
+        print(GameManager.instance.bubbleMultiplierActual);
+        var normalizedTotal = totalBubble/600; 
+        var boostAmount=normalizedTotal*maxVelocity;
+        if (boostAmount >= maxVelocity) {
+            return new Vector2(0, maxVelocity);
+        }
+        else {
+            return new Vector2(0, boostAmount);
+        }
         
-   
-        return new Vector2(0, 1 * collectedBubbles * bubbleMultiplier * boostScaler);
     }
     
     public void onBoostStart() {
         rb.velocity = GetBoostAmount();
-        print(rb.velocity.y);
-        bubbleMultiplier = 1;
+        GameManager.instance.ResetMultiplier();
         manager.ResetBubbleCount();
         Invoke("SetFlightOn", 0.2f);
         particles.SetActive(true);

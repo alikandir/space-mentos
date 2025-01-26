@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class BubbleBooster : MonoBehaviour
 {
-    public float bubbleMultiplier = 1;
+    private float bubbleMultiplier = 0.15f;
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             
-            MentosFlight mentosFlight = other.GetComponent<MentosFlight>();
-            mentosFlight.bubbleMultiplier+=bubbleMultiplier;
+            GameManager.instance.CollectMultiplier(bubbleMultiplier);
             Destroy(gameObject);
             
         }
