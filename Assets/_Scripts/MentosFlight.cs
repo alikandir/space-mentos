@@ -13,6 +13,7 @@ public class MentosFlight : MonoBehaviour
     public float moveSpeed = 5f;
     public float maxFallSpeed = 10f;
     private GameObject particles;
+    private GameObject reverseParticles;
     bool particleActive = false;
     private Transform trans;
     
@@ -21,7 +22,9 @@ public class MentosFlight : MonoBehaviour
         manager = GameManager.instance;
         Invoke("onBoostStart",2);
         particles = GameObject.Find("Particles");
+        reverseParticles = GameObject.Find("ReverseParticles");
         particles.SetActive(false);
+        reverseParticles.SetActive(false);
         trans = GetComponent<Transform>();
     }
     
@@ -34,6 +37,11 @@ public class MentosFlight : MonoBehaviour
                 particles.SetActive(false);
                 particleActive = false;
             }
+        }
+        if (rb.velocity.y < -1) {
+            reverseParticles.SetActive(true);
+        } else {
+            reverseParticles.SetActive(false);
         }
         float rotationSpeed = 2;
         float targetZRotation = -1*Mathf.Clamp(input * 30, -30, 30);
@@ -66,6 +74,6 @@ public class MentosFlight : MonoBehaviour
         particleActive = true;
     }
     public void SetFlightOn() {manager.isFlying = true;}
-    
+
     
 }
