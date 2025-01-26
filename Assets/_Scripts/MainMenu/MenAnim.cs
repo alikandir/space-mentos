@@ -7,6 +7,8 @@ public class MenAnim : MonoBehaviour
 {
     void PlayTheGame()
     {
-        SceneManager.LoadScene("Collect");
+        GameManager.instance.ResetMultiplier();
+        GameManager.instance.ResetBubbleCount();
+        GameManager.instance.ReBottle();
     }
 }

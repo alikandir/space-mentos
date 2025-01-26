@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
            
             if (isTimerSet && Time.time - startTime > collectingTime && isWaitingTimeline==true)
             {
-                Invoke("SendToFlight", 6f);
+                Invoke("SendToFlight", 3.5f);
                 isWaitingTimeline=false;
                 
             }
