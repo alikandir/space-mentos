@@ -60,13 +60,14 @@ public class MentosFlight : MonoBehaviour
 
     private Vector2 GetBoostAmount() {
         float collectedBubbles = manager.GetBubbleCollected()*collectedBubbleScaler;
-        float diminishingMultiplier = Mathf.Log(collectedBubbles + 1) / Mathf.Log(2); // Logarithmic diminishing returns
+        
    
-        return new Vector2(0, 1 * collectedBubbles * diminishingMultiplier * boostScaler);
+        return new Vector2(0, 1 * collectedBubbles * bubbleMultiplier * boostScaler);
     }
     
     public void onBoostStart() {
         rb.velocity = GetBoostAmount();
+        print(rb.velocity.y);
         bubbleMultiplier = 1;
         manager.ResetBubbleCount();
         Invoke("SetFlightOn", 0.2f);
