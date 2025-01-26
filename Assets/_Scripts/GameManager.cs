@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public float bubbleMultiplierForTxt = 1;
     public event Action<float> OnMultCollected;
     public float maxHeightReached = 0;
+    bool isWaitingTimeline=false;
     private void Awake() {
         
         if (instance == null) {
@@ -60,9 +61,11 @@ public class GameManager : MonoBehaviour
         if (isCollecting)
         {
            
-            if (isTimerSet && Time.time - startTime > collectingTime)
+            if (isTimerSet && Time.time - startTime > collectingTime && isWaitingTimeline==true)
             {
-                Invoke("SendToFlight", 12f);
+                Invoke("SendToFlight", 6f);
+                isWaitingTimeline=false;
+                
             }
             if(!isTimerSet)
             {
@@ -86,6 +89,7 @@ public class GameManager : MonoBehaviour
     {
         startTime = Time.time;
         isTimerSet = true;
+        isWaitingTimeline=true;
     }
 
     public void ReBottle()

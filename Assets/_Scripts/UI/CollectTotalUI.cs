@@ -16,7 +16,8 @@ public class CollectTotalUI : MonoBehaviour
         float bubbleCollected=GameManager.instance.GetBubbleCollected();
         float mult=GameManager.instance.bubbleMultiplierForTxt;
         _text.text = (bubbleCollected*mult).ToString();
+        print("bubbleCollected*mult: "+bubbleCollected*mult + " bubbleCollected: "+bubbleCollected + " mult: "+mult);
     }
-
+    
     
 }
