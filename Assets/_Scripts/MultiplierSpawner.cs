@@ -12,7 +12,7 @@ public class MultiplierSpawner : MonoBehaviour
     }
     public Vector3 GetSpawnPosition()
     {
-        return new Vector3(Random.Range(-7, 7), Random.Range(5, 100), 0);
+        return new Vector3(Random.Range(-1, 7), Random.Range(1, 80), 0);
     }
 
     public void SpawnMultipliers()

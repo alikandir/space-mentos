@@ -12,22 +12,46 @@ public class MentosFlight : MonoBehaviour
     float input;
     public float moveSpeed = 5f;
     public float maxFallSpeed = 10f;
+    private GameObject particles;
+    private GameObject reverseParticles;
+    bool particleActive = false;
+    private Transform trans;
     
     private void Start() {
         rb = GetComponent<Rigidbody>();
         manager = GameManager.instance;
         Invoke("onBoostStart",2);
+        particles = GameObject.Find("Particles");
+        reverseParticles = GameObject.Find("ReverseParticles");
+        particles.SetActive(false);
+        reverseParticles.SetActive(false);
+        trans = GetComponent<Transform>();
     }
     
     public void OnMove(InputAction.CallbackContext context) {
-        input = context.ReadValue<float>();
-        
-        
+        input = context.ReadValue<float>()*-1;
     }
-    
+    private void Update() {
+        if (particleActive) {
+            if (rb.velocity.y < 0) {
+                particles.SetActive(false);
+                particleActive = false;
+            }
+        }
+        if (rb.velocity.y < -1) {
+            reverseParticles.SetActive(true);
+        } else {
+            reverseParticles.SetActive(false);
+        }
+        float rotationSpeed = 2;
+        float targetZRotation = -1*Mathf.Clamp(input * 30, -30, 30);
+        Quaternion targetRotation = Quaternion.Euler(trans.rotation.eulerAngles.x, trans.rotation.eulerAngles.y, targetZRotation);
+        trans.rotation = Quaternion.Lerp(trans.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
     private void FixedUpdate() {
         if (manager.isFlying) {
             rb.velocity = new Vector2(input*moveSpeed*Time.fixedDeltaTime, Mathf.Max(rb.velocity.y, -maxFallSpeed));
+            
         }
         
     }
@@ -46,8 +70,10 @@ public class MentosFlight : MonoBehaviour
         bubbleMultiplier = 1;
         manager.ResetBubbleCount();
         Invoke("SetFlightOn", 0.2f);
+        particles.SetActive(true);
+        particleActive = true;
     }
     public void SetFlightOn() {manager.isFlying = true;}
-    
+
     
 }
