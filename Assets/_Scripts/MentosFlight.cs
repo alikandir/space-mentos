@@ -43,8 +43,13 @@ public class MentosFlight : MonoBehaviour
         } else {
             reverseParticles.SetActive(false);
         }
+        float targetZRotation;
         float rotationSpeed = 2;
-        float targetZRotation = -1*Mathf.Clamp(input * 30, -30, 30);
+        if (rb.velocity.y < -0.5f) {
+            targetZRotation = Mathf.Clamp(input * 30, -30, 30);
+        }
+        else {targetZRotation = -1*Mathf.Clamp(input * 30, -30, 30);}
+            
         Quaternion targetRotation = Quaternion.Euler(trans.rotation.eulerAngles.x, trans.rotation.eulerAngles.y, targetZRotation);
         trans.rotation = Quaternion.Lerp(trans.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
