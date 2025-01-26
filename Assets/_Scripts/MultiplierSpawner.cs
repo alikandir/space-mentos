@@ -21,6 +21,7 @@ public class MultiplierSpawner : MonoBehaviour
         for (int i = 0; i < spawnAmount; i++)
         {
             _spawnedMultipliers[i] = Instantiate(multiplierPrefab, GetSpawnPosition(), Quaternion.identity);
+            _spawnedMultipliers[i].transform.rotation = Quaternion.Euler(90, 90, 0);
         }
     }
 

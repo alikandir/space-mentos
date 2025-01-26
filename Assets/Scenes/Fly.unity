@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c87c0d9c71ffb4883596570e2f8ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplierPrefab: {fileID: 7907093847267256174, guid: 0c99739e91e51c54ea3b485a06c42bb0,
+  multiplierPrefab: {fileID: 640347422703743723, guid: aaeff6ad4fd5cfe448a38239e4bb7c58,
     type: 3}
   spawnAmount: 150
 --- !u!4 &1118714519
